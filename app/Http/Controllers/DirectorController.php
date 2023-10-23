@@ -12,10 +12,12 @@ class DirectorController extends Controller
      */
     public function index()
     {
-        $directors = Director::orderBy('created_at', 'desc')->paginate(10);
-        return view('directors.index', [
-            'directors' => $directors,
-        ]);
+        // $directors = Director::orderBy('created_at', 'desc')->paginate(10);
+
+        // return view('directors.index', [
+        //     'directors' => $directors,
+        // ]);
+        return view('directors.index');
     }
 
     /**
