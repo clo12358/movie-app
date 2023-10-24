@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Director;
+use App\Models\Writer;
 
 class DirectorController extends Controller
 {
@@ -19,7 +19,7 @@ class DirectorController extends Controller
         return view('directors.index', [
             'directors' => $directors,
         ]);
-        // return view('directors.index');
+        // return view('writers.index');
     }
 
     /**
