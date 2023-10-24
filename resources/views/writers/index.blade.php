@@ -2,7 +2,7 @@
 
 @section('header')
 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-    Directors
+    Writers
 </h2>
 @endsection
 
@@ -25,13 +25,13 @@
     </table>
 
     <tbody>
-@forelse($directors as $director)
+@forelse($writers as $director)
     <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            {{ $director->first_name }}
+            {{ $writer->first_name }}
         </th>
         <td class="px-6 py-4">
-            {{ $director->last_name }}
+            {{ $writer->last_name }}
         </td>
     </tr>
     @empty

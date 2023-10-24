@@ -25,7 +25,7 @@
         @yield('content')
     </div>
  
-    <!-- This creates an alert if a Todo is created -->
+    <!-- This creates an alert if a Director is created -->
     @if(session('status'))
         <div id="alert">
             {{session('status')}}

@@ -3,23 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Director;
+use App\Models\Writer;
 
-class DirectorController extends Controller
+class WriterController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $directors = Director::all();
+        $writers = Writer::all();
         //only display 8 at a time
         // orderBy('created_at', 'desc')->paginate(10)
 
-        return view('directors.index', [
-            'directors' => $directors,
+        return view('writers.index', [
+            'writers' => $writers,
         ]);
-        // return view('directors.index');
+        // return view('writers.index');
     }
 
     /**
