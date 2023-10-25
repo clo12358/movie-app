@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h3>Add Directors</h3>
+<h3>Create Director</h3>
 
 {{-- @if ($errors->any())
     <div class="alert alert-danger">
@@ -18,17 +18,17 @@
     @csrf
     <div>
         <label>First Name</label>
-        <input type="text" name="First Name" id="First Name" value="{{ old('title') }}">
-        <!-- adds error message beside the text box -->
-        @if($errors->has('First Name'))
-        <span> {{ $errors->first('First Name') }} </span>
+        <input type="text" name="title" id="title" value="{{ old('title') }}">
+        {{-- adds error message beside the text box --}}
+        @if($errors->has('title'))
+        <span> {{ $errors->first('title') }} </span>
         @endif
     </div>
     <div>
         <label>Last Name</label>
-        <input type="text" name="Last Name" id="Last Name" value="{{ old('body') }}">
-        @if($errors->has('Last Mame'))
-        <span> {{ $errors->first('Last Name') }} </span>
+        <input type="text" name="title" id="title" value="{{ old('title') }}">
+        @if($errors->has('title'))
+        <span> {{ $errors->first('title') }} </span>
         @endif
     </div>
     <button type="submit">Create</button>

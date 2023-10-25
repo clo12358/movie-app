@@ -27,7 +27,7 @@ class DirectorController extends Controller
      */
     public function create()
     {
-        //
+        return view('directors.create');
     }
 
     /**
