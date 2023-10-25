@@ -3,21 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Director;
+use App\Models\Genre;
 
-class DirectorController extends Controller
+class GenreController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $directors = Director::all();
+        $genres = Genre::all();
         //only display 8 at a time
         // orderBy('created_at', 'desc')->paginate(10)
 
-        return view('directors.index', [
-            'directors' => $directors,
+        return view('genres.index', [
+            'genres' => $genres,
         ]);
         // return view('writers.index');
     }
