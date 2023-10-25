@@ -34,6 +34,9 @@
         <td class="px-6 py-4">
             {{ $director->last_name }}
         </td>
+        <td class="px-6 py-4">
+            {{ $director->created_at }}
+        </td>
     </tr>
     @empty
         <h4>No Directors found!</h4>

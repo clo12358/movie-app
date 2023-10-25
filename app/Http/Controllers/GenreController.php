@@ -27,7 +27,7 @@ class GenreController extends Controller
      */
     public function create()
     {
-        //
+        return view('genres.create');
     }
 
     /**
@@ -35,7 +35,30 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->title);
+
+        //validation rules
+        $rules = [
+            'name' => 'required|string|unique:genres,name|min:2|max:150', //Makes sure the name is unique
+            'description' => 'required|string|min:5|max:2000',
+
+        ];
+        ////////
+        
+        $messages = [
+            'name.unique' => 'Genre name should be unique'
+        ];
+
+        $request->validate($rules, $messages);
+
+        $genre = new Genre;
+        $genre->name = $request->name;
+        $genre->description = $request->description;
+        $genre->save();
+
+        return redirect()
+                ->route('genres.index')
+                ->with('status', 'Created a new Genre!');
     }
 
     /**

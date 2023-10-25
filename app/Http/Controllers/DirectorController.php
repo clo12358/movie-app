@@ -35,7 +35,30 @@ class DirectorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->title);
+
+        //validation rules
+        $rules = [
+            'first_name' => 'required|string|min:5|max:150', 
+            'last_name' => 'required|string|min:5|max:1000',
+
+        ];
+        ////////
+        
+        // $messages = [
+        //     'title.unique' => 'Todo title should be unique'
+        // ];
+
+        $request->validate($rules);
+
+        $director = new Director;
+        $director->first_name = $request->first_name;
+        $director->last_name = $request->last_name;
+        $director->save();
+
+        return redirect()
+                ->route('directors.index')
+                ->with('status', 'Created a new Director!');
     }
 
     /**

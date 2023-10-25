@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h3>Create Director</h3>
+<h3>Create Genre</h3>
 
 {{-- @if ($errors->any())
     <div class="alert alert-danger">
@@ -14,19 +14,19 @@
     </div>
 @endif --}}
 
-<form action="{{ route('directors.store') }}" method="post">
+<form action="{{ route('genres.store') }}" method="post">
     @csrf
     <div>
-        <label>First Name</label>
-        <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}">
+        <label>Name</label>
+        <input type="text" name="name" id="name" value="{{ old('name') }}">
         {{-- adds error message beside the text box --}}
         @if($errors->has('title'))
         <span> {{ $errors->first('title') }} </span>
         @endif
     </div>
     <div>
-        <label>Last Name</label>
-        <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}">
+        <label>Description</label>
+        <input type="text" name="desctription" id="desctription" value="{{ old('description') }}">
         @if($errors->has('title'))
         <span> {{ $errors->first('title') }} </span>
         @endif
