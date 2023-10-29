@@ -27,7 +27,7 @@ class WriterController extends Controller
      */
     public function create()
     {
-        //
+        return view('writers.create');
     }
 
     /**
@@ -35,7 +35,27 @@ class WriterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->title);
+
+        //validation rules
+        $rules = [
+            'name' => 'required|string|min:5|max:150', 
+        ];
+        ////////
+        
+        // $messages = [
+        //     'title.unique' => 'Name title should be unique'
+        // ];
+
+        $request->validate($rules);
+
+        $writer = new Writer;
+        $writer->name = $request->name;
+        $writer->save();
+
+        return redirect()
+                ->route('writers.index')
+                ->with('status', 'Created a new Writer!');
     }
 
     /**
@@ -43,7 +63,11 @@ class WriterController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $writer = Writer::FindOrFail($id);
+        
+        return view('writers.show', [
+            'writer' => $writer
+        ]);
     }
 
     /**
@@ -51,7 +75,11 @@ class WriterController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $writer = Writer::FindOrFail($id);
+
+        return view('writers.edit', [
+            'writer' => $writer
+        ]);
     }
 
     /**
@@ -59,7 +87,29 @@ class WriterController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
+        // dd($request->title);
+
+        //validation rules
+        $rules = [
+            'name' => 'required|string|min:5|max:150', 
+        ];
+        ////////
+        
+        $messages = [
+            'title.unique' => 'Writer title should be unique'
+        ];
+
+        $request->validate($rules, $messages);
+
+        $writer = Writer::FindOrFail($id);
+        $writer->name = $request->name;
+        $writer->save();
+
+        return redirect()
+                ->route('writers.index')
+                ->with('status', 'Updated Writer!');
+
     }
 
     /**
@@ -67,6 +117,9 @@ class WriterController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $writer = Writer::findOrFail($id);
+        $writer->delete();
+
+        return redirect()->route('writers.index')->with('status', 'Writer deleted successfully');
     }
 }
