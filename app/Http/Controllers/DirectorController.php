@@ -19,7 +19,7 @@ class DirectorController extends Controller
         return view('directors.index', [
             'directors' => $directors,
         ]);
-        // return view('writers.index');
+        // return view('directors.index');
     }
 
     /**
@@ -66,7 +66,11 @@ class DirectorController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $director = Director::FindOrFail($id);
+        
+        return view('directors.show', [
+            'director' => $director
+        ]);
     }
 
     /**
@@ -74,7 +78,11 @@ class DirectorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $director = Director::FindOrFail($id);
+
+        return view('directors.edit', [
+            'director' => $director
+        ]);
     }
 
     /**
@@ -82,7 +90,29 @@ class DirectorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
+        // dd($request->title);
+
+        //validation rules
+        $rules = [
+            'first_name' => 'required|string|min:5|max:150', 
+        ];
+        ////////
+        
+        $messages = [
+            'title.unique' => 'Director title should be unique'
+        ];
+
+        $request->validate($rules, $messages);
+
+        $director = Director::FindOrFail($id);
+        $director->name = $request->name;
+        $director->save();
+
+        return redirect()
+                ->route('directors.index')
+                ->with('status', 'Updated Director!');
+
     }
 
     /**
@@ -90,6 +120,9 @@ class DirectorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $director = Director::findOrFail($id);
+        $director->delete();
+
+        return redirect()->route('directors.index')->with('status', 'Director deleted successfully');
     }
 }

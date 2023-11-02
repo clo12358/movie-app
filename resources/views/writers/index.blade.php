@@ -23,15 +23,23 @@
     </table>
 
     <tbody>
-@forelse($writers as $writer)
-    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            {{ $writer->name }}
-        </th>
-    </tr>
-    @empty
-        <h4>No Writers found!</h4>
-    @endforelse
-    </tbody>
+            @forelse($writers as $writer)
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ $writer->name }}
+                </th>
+                <td class="px-6 py-4">
+                    {{ $writer->created_at }}
+                </td>
+                <td class="px-6 py-4">
+                    <a href="{{ route('writers.show', $writer->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Read More</a>
+                </td>
+            </tr>
+        
+        @empty
+            <h4>No Writers found!</h4>
+        @endforelse
+            
+        </tbody>
 </div>
 @endsection

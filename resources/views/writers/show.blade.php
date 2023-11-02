@@ -1,10 +1,7 @@
 @extends('layouts.myApp')
 
 @section('content')
-<h1>Todo #{{$writer->id}}</h1>
-
-<p>{{ $writer->title }}</p>
-<p>{{ $writer->body }}</p>
+<h1>{{$writer->name}}</h1>
 
 <div>
     <a href="{{ route('writers.edit', $writer->id) }}">Edit</a>
@@ -14,6 +11,8 @@
         @method('DELETE')
         <button type="submit">Delete</button>
     </form>
+
+    <a href="{{ route('writers.index', $writer->id) }}">Back</a>
 
 </div>
 
