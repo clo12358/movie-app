@@ -19,7 +19,7 @@ class GenreController extends Controller
         return view('genres.index', [
             'genres' => $genres,
         ]);
-        // return view('writers.index');
+        // return view('genres.index');
     }
 
     /**
@@ -66,7 +66,11 @@ class GenreController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $genre = Genre::FindOrFail($id);
+        
+        return view('genres.show', [
+            'genre' => $genre
+        ]);
     }
 
     /**
@@ -74,7 +78,11 @@ class GenreController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $genre = Genre::FindOrFail($id);
+
+        return view('genres.edit', [
+            'genre' => $genre
+        ]);
     }
 
     /**
@@ -82,7 +90,30 @@ class GenreController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
+        // dd($request->title);
+
+        //validation rules
+        $rules = [
+            'name' => 'required|string|unique:genres,name|min:2|max:150', //Makes sure the name is unique
+            'description' => 'required|string|min:5|max:2000',
+        ];
+        ////////
+        
+        $messages = [
+            'title.unique' => 'Genre title should be unique'
+        ];
+
+        $request->validate($rules, $messages);
+
+        $genre = Genre::FindOrFail($id);
+        $genre->name = $request->name;
+        $genre->save();
+
+        return redirect()
+                ->route('genres.index')
+                ->with('status', 'Updated Genre!');
+
     }
 
     /**
@@ -90,6 +121,9 @@ class GenreController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $genre = Genre::findOrFail($id);
+        $genre->delete();
+
+        return redirect()->route('genres.index')->with('status', 'Genre deleted successfully');
     }
 }
