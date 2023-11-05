@@ -31,7 +31,7 @@
         <span> {{ $errors->first('title') }} </span>
         @endif
     </div>
-    <button type="submit">Create</button>
+    <button name="submit" id="submit" type="submit" class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-100 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-400 dark:hover:bg-green-500 focus:outline-none dark:focus:ring-green-600">Create</button>
 </form>
 
 @endsection

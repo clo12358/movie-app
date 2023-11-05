@@ -14,7 +14,7 @@
     </div>
 @endif --}}
 
-<form action="{{ route('genres.store') }}" method="post">
+<form action="{{ route('genres.store') }}" method="POST">
     @csrf
     <div>
         <label>Name</label>
@@ -31,7 +31,7 @@
         <span> {{ $errors->first('title') }} </span>
         @endif
     </div>
-    <button type="submit">Create</button>
+    <button name="submit" id="submit" type="submit">Create</button>
 </form>
 
 @endsection

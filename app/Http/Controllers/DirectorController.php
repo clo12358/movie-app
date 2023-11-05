@@ -40,7 +40,7 @@ class DirectorController extends Controller
         //validation rules
         $rules = [
             'first_name' => 'required|string|min:5|max:150', 
-            'last_name' => 'required|string|min:5|max:1000',
+            'last_name' => 'required|string|min:5|max:150',
 
         ];
         ////////

@@ -7,7 +7,8 @@
 @endsection
 
 @section('content')
-<a href="{{ route('directors.create') }}">Create</a>
+<!-- <a href="{{ route('directors.create') }}">Create</a> -->
+<a href="{{ route('directors.create') }}" class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-100 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-400 dark:hover:bg-green-500 focus:outline-none dark:focus:ring-green-600">Create</a>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -20,6 +21,9 @@
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Created At
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Read More
                 </th>
             </tr>
         </thead>
