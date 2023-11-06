@@ -38,9 +38,18 @@ class MovieController extends Controller
         // dd($request->title);
 
         //validation rules
-        // $rules = [
-        //     'name' => 'required|string|min:5|max:150', 
-        // ];
+        $rules = [
+            'name' => 'required|string|min:5|max:150', 
+            'description' => 'required|string|min:5|max:1000',
+            'rating' => 'required|enum',
+            'run_time' => 'required|string',
+            'run_time' => 'required|string',
+            'director_id' => 'required',
+            'genre_id' => 'required',
+            'writer_id' => 'required',
+            'producer' => 'required|string|min:5|max:150',
+            'date' => 'required'
+        ];
         ////////
         
         // $messages = [
@@ -93,6 +102,15 @@ class MovieController extends Controller
         //validation rules
         // $rules = [
         //     'name' => 'required|string|min:5|max:150', 
+        //     'description' => 'required|string|min:5|max:1000',
+        //     'rating' => 'required|enum',
+        //     'run_time' => 'required|string',
+        //     'run_time' => 'required|string',
+        //     'director_id' => 'required',
+        //     'genre_id' => 'required',
+        //     'writer_id' => 'required',
+        //     'producer' => 'required|string|min:5|max:150',
+        //     'date' => 'required'
         // ];
         ////////
         

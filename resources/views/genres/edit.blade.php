@@ -38,6 +38,7 @@
             <span> {{ $errors->first('body') }} </span>
             @endif
         </div>
+        
         <!-- Buttons -->
         <div class="pt-2.5">
             <form action="{{ route('genres.update', $genre->id) }}" method="post" >

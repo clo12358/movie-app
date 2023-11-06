@@ -43,10 +43,6 @@ class WriterController extends Controller
         ];
         ////////
         
-        // $messages = [
-        //     'title.unique' => 'Name title should be unique'
-        // ];
-
         $request->validate($rules);
 
         $writer = new Writer;

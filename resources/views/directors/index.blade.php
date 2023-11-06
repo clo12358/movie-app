@@ -25,24 +25,18 @@
                     Last Name
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Created At
-                </th>
-                <th scope="col" class="px-6 py-3">
                     Read More
                 </th>
             </tr>
         </thead>
         <tbody>
-@forelse($directors as $director)
+    @forelse($directors as $director)
     <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             {{ $director->first_name }}
         </th>
         <td class="px-6 py-4">
             {{ $director->last_name }}
-        </td>
-        <td class="px-6 py-4">
-            {{ $director->created_at }}
         </td>
         <td class="px-6 py-4">
             <a href="{{ route('directors.show', $director->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Read More</a>

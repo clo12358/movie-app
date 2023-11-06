@@ -14,7 +14,7 @@ class DirectorController extends Controller
     {
         $directors = Director::all();
         //only display 8 at a time
-        // orderBy('created_at', 'desc')->paginate(10)
+        // orderBy('created_at', 'desc')->paginate(10);
 
         return view('directors.index', [
             'directors' => $directors,
@@ -40,14 +40,10 @@ class DirectorController extends Controller
         //validation rules
         $rules = [
             'first_name' => 'required|string|min:5|max:150', 
-            'last_name' => 'required|string|min:5|max:150',
+            'last_name' => 'required|string|min:2|max:150',
 
         ];
         ////////
-        
-        // $messages = [
-        //     'title.unique' => 'Todo title should be unique'
-        // ];
 
         $request->validate($rules);
 
