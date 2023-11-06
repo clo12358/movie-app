@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('director', function (Blueprint $table) {
+        Schema::create('directors', function (Blueprint $table) {
             $table->id();
+            $table->string('first_name');
+            $table->string('last_name');
             $table->timestamps();
         });
     }
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('director');
+        Schema::dropIfExists('directors');
     }
 };

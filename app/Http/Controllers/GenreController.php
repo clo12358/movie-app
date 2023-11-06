@@ -35,7 +35,7 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->title);
+        // dd($request);
 
         //validation rules
         $rules = [
