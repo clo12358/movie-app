@@ -106,7 +106,8 @@ class DirectorController extends Controller
         $request->validate($rules, $messages);
 
         $director = Director::FindOrFail($id);
-        $director->name = $request->name;
+        $director->first_name = $request->first_name;
+        $director->last_name = $request->last_name;
         $director->save();
 
         return redirect()
