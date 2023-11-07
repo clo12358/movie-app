@@ -1,7 +1,28 @@
 @extends('layouts.myApp')
 
-@section('content')
 
+@section('content')
+<!-- 
+// try {
+//     // This finds all directors, genres and writers in the database so you can choose them when creating a new movie.
+//     $directors = Director::findAll();
+//     $genres = Genre::findAll();
+//     $writers = Writer::findAll();
+
+//     if (session_status() === PHP_SESSION_NONE){
+//         session_start();
+//     }
+//     if (array_key_exists("form-data", $_SESSION)){
+//         print_r($_SESSION["form-data"]);
+//     }
+//     if (array_key_exists("form-errors", $_SESSION)){
+//         print_r($_SESSION["form-errors"]);
+//     }
+// }
+// catch (Exception $e) {
+//     die($e->getMessage());
+// }
+?> -->
 <div class="bg-white dark:bg-gray-900 w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -72,10 +93,16 @@
         <div>
             <label for="director_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Director</label>
             <select id="directors" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <!-- <option>United States</option>
-                <option>Canada</option>
-                <option>France</option>
-                <option>Germany</option> -->
+
+
+            @forelse($directors as $d)
+
+            <option value="{{ $d->id }}">{{ $d->first_name }} {{ $d->last_name }}</option>
+
+            @empty
+            <h4>No Directors found!</h4>
+            @endforelse
+                
             </select>
             <!-- adds error message beside the text box -->
             @if($errors->has('director_id'))

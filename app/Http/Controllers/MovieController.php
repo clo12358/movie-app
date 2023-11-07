@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
+use App\Models\Director;
+use App\Models\Genre;
+use App\Models\Writer;
 
 class MovieController extends Controller
 {
@@ -27,7 +30,15 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view('movies.create');
+        $directors = Director::all();
+        $genres = Genre::all();
+        $writers = Writer::all();
+
+        return view('movies.create', [
+            'directors' => $directors,
+            'genres' => $genres,
+            'movies' => $movies
+        ]);
     }
 
     /**
