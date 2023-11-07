@@ -16,11 +16,13 @@ class MovieController extends Controller
     public function index()
     {
         $movies = Movie::all();
+        $genres = Genre::all();
         //only display 8 at a time
         // orderBy('created_at', 'desc')->paginate(10)
 
         return view('movies.index', [
             'movies' => $movies,
+            'genres' => $genres,
         ]);
         // return view('movies.index');
     }
@@ -87,10 +89,10 @@ class MovieController extends Controller
      */
     public function show(string $id)
     {
-        $movie = Movie::FindOrFail($id);
+        $movies = Movie::FindOrFail($id);
         
         return view('movies.show', [
-            'movie' => $movie
+            'movies' => $movies
         ]);
     }
 
@@ -99,10 +101,16 @@ class MovieController extends Controller
      */
     public function edit(string $id)
     {
-        $movie = Movie::FindOrFail($id);
+        $movie = Movie::findOrFail($id);
+        $directors = Director::all();
+        $genres = Genre::all();
+        $writers = Writer::all();
 
         return view('movies.edit', [
-            'movie' => $movie
+            'movie' => $movie,
+            'directors' => $directors,
+            'genres' => $genres,
+            'writers' => $writers
         ]);
     }
 
@@ -115,25 +123,35 @@ class MovieController extends Controller
         // dd($request->title);
 
         //validation rules
-        // $rules = [
-        //     'name' => 'required|string|min:5|max:150', 
-        //     'description' => 'required|string|min:5|max:1000',
-        //     'rating' => 'required|enum',
-        //     'run_time' => 'required|string',
-        //     'run_time' => 'required|string',
-        //     'director_id' => 'required',
-        //     'genre_id' => 'required',
-        //     'writer_id' => 'required',
-        //     'producer' => 'required|string|min:5|max:150',
-        //     'date' => 'required'
-        // ];
+        $rules = [
+            'name' => 'required|string|min:5|max:150', 
+            'description' => 'required|string|min:5|max:1000',
+            'rating' => 'required|in:1 star,2 stars,3 stars,4 stars,5 stars',
+            'run_time' => 'required|string',
+            'director_id' => 'required|exists:directors,id',
+            'genre_id' => 'required|exists:genres,id',
+            'writer_id' => 'required|exists:writers,id',
+            'producer' => 'required|string|min:5|max:150',
+            'release_date' => 'required'
+        ];
         ////////
-        
-        // $messages = [
-        //     'title.unique' => 'Movie title should be unique'
-        // ];
+
+        $messages = [
+            'title.unique' => 'Director title should be unique'
+        ];
 
         $request->validate($rules, $messages);
+
+        $movie = new Movie;
+        $movie->name = $request->name;
+        $movie->description = $request->description;
+        $movie->rating = $request->rating;
+        $movie->run_time = $request->run_time;
+        $movie->director_id = $request->director_id;
+        $movie->genre_id = $request->genre_id;
+        $movie->writer_id = $request->writer_id;
+        $movie->producer = $request->producer;
+        $movie->release_date = $request->release_date;
 
         $movie = Movie::FindOrFail($id);
         $movie->name = $request->name;
