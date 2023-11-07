@@ -37,7 +37,7 @@ class MovieController extends Controller
         return view('movies.create', [
             'directors' => $directors,
             'genres' => $genres,
-            'movies' => $movies
+            'writers' => $writers
         ]);
     }
 
@@ -46,31 +46,35 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->title);
+        // dd($request);
 
         //validation rules
         $rules = [
             'name' => 'required|string|min:5|max:150', 
             'description' => 'required|string|min:5|max:1000',
-            'rating' => 'required|enum',
+            'rating' => 'required|in:1 star,2 stars,3 stars,4 stars,5 stars',
             'run_time' => 'required|string',
-            'run_time' => 'required|string',
-            'director_id' => 'required',
-            'genre_id' => 'required',
-            'writer_id' => 'required',
+            'director_id' => 'required|exists:directors,id',
+            'genre_id' => 'required|exists:genres,id',
+            'writer_id' => 'required|exists:writers,id',
             'producer' => 'required|string|min:5|max:150',
-            'date' => 'required'
+            'release_date' => 'required'
         ];
         ////////
-        
-        // $messages = [
-        //     'title.unique' => 'Name title should be unique'
-        // ];
 
         $request->validate($rules);
 
         $movie = new Movie;
         $movie->name = $request->name;
+        $movie->description = $request->description;
+        $movie->rating = $request->rating;
+        $movie->run_time = $request->run_time;
+        $movie->director_id = $request->director_id;
+        $movie->genre_id = $request->genre_id;
+        $movie->writer_id = $request->writer_id;
+        $movie->producer = $request->producer;
+        $movie->release_date = $request->release_date;
+
         $movie->save();
 
         return redirect()

@@ -66,12 +66,12 @@
         <!-- Select Rating -->
         <div>
             <label for="rating" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rating</label>
-            <select id="rating" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option>1 Star</option>
-                <option>2 Stars</option>
-                <option>3 Stars</option>
-                <option>4 Stars</option>
-                <option>5 Stars</option>
+            <select name="rating" id="rating" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="1 star">1 Star</option>
+                <option value="2 stars">2 Stars</option>
+                <option value="3 stars">3 Stars</option>
+                <option value="4 stars">4 Stars</option>
+                <option value="5 stars">5 Stars</option>
             </select>
             <!-- adds error message beside the text box -->
             @if($errors->has('rating'))
@@ -92,8 +92,7 @@
         <!-- Select Director -->
         <div>
             <label for="director_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Director</label>
-            <select id="directors" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-
+            <select name="director_id" id="directors" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
             @forelse($directors as $d)
 
@@ -113,11 +112,16 @@
         <!-- Select Genre -->
         <div>
             <label for="genre_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Genre</label>
-            <select id="genres" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <!-- <option>United States</option>
-                <option>Canada</option>
-                <option>France</option>
-                <option>Germany</option> -->
+            <select name="genre_id" id="genres" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+            @forelse($genres as $g)
+
+            <option value="{{ $g->id }}">{{ $g->name }}</option>
+
+            @empty
+            <h4>No Genres found!</h4>
+            @endforelse
+                
             </select>
             <!-- adds error message beside the text box -->
             @if($errors->has('genre_id'))
@@ -128,11 +132,16 @@
         <!-- Select Writer -->
         <div>
             <label for="writer_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Writer</label>
-            <select id="writers" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <!-- <option>United States</option>
-                <option>Canada</option>
-                <option>France</option>
-                <option>Germany</option> -->
+            <select name="writer_id" id="writers" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+            @forelse($writers as $w)
+
+            <option value="{{ $w->id }}">{{ $w->name }}</option>
+
+            @empty
+            <h4>No Genres found!</h4>
+            @endforelse
+                
             </select>
             <!-- adds error message beside the text box -->
             @if($errors->has('writer_id'))
@@ -143,7 +152,7 @@
         <!-- Movie Producer -->
         <div>
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Producer</label>
-            <input type="text" name="name" id="producer" value="{{ old('producer') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <input type="text" name="producer" id="producer" value="{{ old('producer') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <!-- adds error message beside the text box -->
             @if($errors->has('producer'))
             <span class="text-red-400"> {{ $errors->first('producer') }} </span>
