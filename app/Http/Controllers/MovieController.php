@@ -90,9 +90,15 @@ class MovieController extends Controller
     public function show(string $id)
     {
         $movies = Movie::FindOrFail($id);
+        $directors = Director::all();
+        $genres = Genre::all();
+        $writers = Writer::all();
         
         return view('movies.show', [
-            'movies' => $movies
+            'movies' => $movies,
+            'directors' => $directors,
+            'genres' => $genres,
+            'writers' => $writers
         ]);
     }
 

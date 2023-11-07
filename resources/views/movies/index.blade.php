@@ -57,7 +57,14 @@
                     {{ $movie->rating }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $movie->genre_id }}
+                    <a href="{{ route('genres.show', $movie->genre_id) }}">
+                        @foreach($genres as $genre)
+                            @if($genre->id == $movie->genre_id)
+                            {{$genre->name}}
+                            @continue
+                        @endif
+                        @endforeach
+                    </a>
                 </td>
                 <td class="px-6 py-4">
                     {{ $movie->release_date }}

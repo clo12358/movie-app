@@ -5,7 +5,7 @@
 <div class="bg-white dark:bg-gray-900 w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Genre Information
+            Movie Information
         </h2>
     </div>
 
@@ -65,13 +65,34 @@
             {{ $movies->run_time }}
         </td>
         <td class="px-6 py-4">
-            {{ $movies->director_id }}
+            <a href="{{ route('directors.show', $movies->director_id) }}">
+                @foreach($directors as $director)
+                    @if($director->id == $movies->director_id)
+                    {{$director->first_name}} {{$director->last_name}}
+                    @continue
+                @endif
+                @endforeach
+            </a>
         </td>
         <td class="px-6 py-4">
-            {{ $movies->movies_id }}
+            <a href="{{ route('genres.show', $movies->genre_id) }}">
+                @foreach($genres as $genre)
+                    @if($genre->id == $movies->genre_id)
+                    {{$genre->name}}
+                    @continue
+                @endif
+                @endforeach
+            </a>
         </td>
         <td class="px-6 py-4">
-            {{ $movies->writer_id }}
+            <a href="{{ route('writers.show', $movies->writer_id) }}">
+                @foreach($writers as $writer)
+                    @if($writer->id == $movies->writer_id)
+                    {{$writer->name}}
+                    @continue
+                @endif
+                @endforeach
+            </a>
         </td>
         <td class="px-6 py-4">
             {{ $movies->producer }}
