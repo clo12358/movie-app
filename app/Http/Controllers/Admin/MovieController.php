@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use Auth;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Models\Director;
@@ -15,12 +17,17 @@ class MovieController extends Controller
      */
     public function index()
     {
+        // Auth::user()->authorizeRoles('admin'); 
+        if(!Auth::user()->hasRole('admin'))
+        {
+            return to_route('user.movies.index');
+        }
         $movies = Movie::all();
         $genres = Genre::all();
         //only display 8 at a time
         // orderBy('created_at', 'desc')->paginate(10)
 
-        return view('movies.index', [
+        return view('admin.movies.index', [
             'movies' => $movies,
             'genres' => $genres,
         ]);
@@ -36,11 +43,15 @@ class MovieController extends Controller
         $genres = Genre::all();
         $writers = Writer::all();
 
-        return view('movies.create', [
-            'directors' => $directors,
-            'genres' => $genres,
-            'writers' => $writers
-        ]);
+        return view('admin.movies.create')
+            ->with('directors', $directors)
+            ->with('genres', $genres)
+            ->with('writers', $writers);
+        // return view('movies.create', [
+        //     'directors' => $directors,
+        //     'genres' => $genres,
+        //     'writers' => $writers
+        // ]);
     }
 
     /**
@@ -79,9 +90,11 @@ class MovieController extends Controller
 
         $movie->save();
 
-        return redirect()
-                ->route('movies.index')
-                ->with('status', 'Created a new Movie!');
+        return to_route('admin.movies.index')
+                ->with('status', 'Created a new Movie');
+        // return redirect()
+        //         ->route('movies.index')
+        //         ->with('status', 'Created a new Movie!');
     }
 
     /**

@@ -2,27 +2,7 @@
 
 
 @section('content')
-<!-- 
-// try {
-//     // This finds all directors, genres and writers in the database so you can choose them when creating a new movie.
-//     $directors = Director::findAll();
-//     $genres = Genre::findAll();
-//     $writers = Writer::findAll();
 
-//     if (session_status() === PHP_SESSION_NONE){
-//         session_start();
-//     }
-//     if (array_key_exists("form-data", $_SESSION)){
-//         print_r($_SESSION["form-data"]);
-//     }
-//     if (array_key_exists("form-errors", $_SESSION)){
-//         print_r($_SESSION["form-errors"]);
-//     }
-// }
-// catch (Exception $e) {
-//     die($e->getMessage());
-// }
-?> -->
 <div class="bg-white dark:bg-gray-900 w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -30,18 +10,9 @@
         </h2>
     </div>
 
-{{-- @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif --}}
-
 <div class="px-10">
-    <form action="{{ route('movies.store') }}" method="POST">
+    {{-- <form action="{{ route('movies.store') }}" method="POST"> --}}
+    <form action="{{ route('admin.movies.store') }}" method="post">
         @csrf
         <!-- Movie Name -->
         <div>

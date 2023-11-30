@@ -70,7 +70,8 @@
                     {{ $movie->release_date }}
                 </td>
                 <td class="px-6 py-4">
-                    <a href="{{ route('movies.show', $movie->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Read More</a>
+                    <a href="{{ route('user.movies.show', $movie->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Read More</a>
+                    {{-- <a href="{{ route('movies.show', $movie->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Read More</a> --}}
                 </td>
             </tr>
         @empty
@@ -78,5 +79,7 @@
         @endforelse
         </tbody>
     </table>
+    {{-- I think this is for the paginate thing --}}
+    {{-- {{ $movies->links() }} --}}
 </div>
 @endsection
