@@ -107,7 +107,7 @@ class MovieController extends Controller
         $genres = Genre::all();
         $writers = Writer::all();
         
-        return view('movies.show', [
+        return view('admin.movies.show', [
             'movies' => $movies,
             'directors' => $directors,
             'genres' => $genres,
@@ -125,7 +125,7 @@ class MovieController extends Controller
         $genres = Genre::all();
         $writers = Writer::all();
 
-        return view('movies.edit', [
+        return view('admin.movies.edit', [
             'movie' => $movie,
             'directors' => $directors,
             'genres' => $genres,
@@ -177,7 +177,7 @@ class MovieController extends Controller
         $movie->save();
 
         return redirect()
-                ->route('movies.index')
+                ->route('admin.movies.index')
                 ->with('status', 'Updated Movie!');
 
     }
@@ -190,6 +190,6 @@ class MovieController extends Controller
         $movie = Movie::findOrFail($id);
         $movie->delete();
 
-        return redirect()->route('movies.index')->with('status', 'Movie deleted successfully');
+        return redirect()->route('admin.movies.index')->with('status', 'Movie deleted successfully');
     }
 }

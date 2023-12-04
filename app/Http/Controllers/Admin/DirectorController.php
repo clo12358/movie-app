@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use Auth;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Director;
 
@@ -12,11 +14,15 @@ class DirectorController extends Controller
      */
     public function index()
     {
+        if(!Auth::user()->hasRole('admin'))
+        {
+            return to_route('user.directors.index');
+        }
         $directors = Director::all();
         //only display 8 at a time
         // orderBy('created_at', 'desc')->paginate(10);
 
-        return view('directors.index', [
+        return view('admin.directors.index', [
             'directors' => $directors,
         ]);
         // return view('directors.index');
@@ -27,7 +33,7 @@ class DirectorController extends Controller
      */
     public function create()
     {
-        return view('directors.create');
+        return view('admin.directors.create');
     }
 
     /**
@@ -53,7 +59,7 @@ class DirectorController extends Controller
         $director->save();
 
         return redirect()
-                ->route('directors.index')
+                ->route('admin.directors.index')
                 ->with('status', 'Created a new Director!');
     }
 
@@ -64,7 +70,7 @@ class DirectorController extends Controller
     {
         $director = Director::FindOrFail($id);
         
-        return view('directors.show', [
+        return view('admin.directors.show', [
             'director' => $director
         ]);
     }
@@ -76,7 +82,7 @@ class DirectorController extends Controller
     {
         $director = Director::FindOrFail($id);
 
-        return view('directors.edit', [
+        return view('admin.directors.edit', [
             'director' => $director
         ]);
     }
@@ -107,7 +113,7 @@ class DirectorController extends Controller
         $director->save();
 
         return redirect()
-                ->route('directors.index')
+                ->route('admin.directors.index')
                 ->with('status', 'Updated Director!');
 
     }
@@ -120,6 +126,6 @@ class DirectorController extends Controller
         $director = Director::findOrFail($id);
         $director->delete();
 
-        return redirect()->route('directors.index')->with('status', 'Director deleted successfully');
+        return redirect()->route('admin.directors.index')->with('status', 'Director deleted successfully');
     }
 }

@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use Auth;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Genre;
 
@@ -12,11 +14,15 @@ class GenreController extends Controller
      */
     public function index()
     {
+        if(!Auth::user()->hasRole('admin'))
+        {
+            return to_route('user.genres.index');
+        }
         $genres = Genre::all();
         //only display 8 at a time
         // orderBy('created_at', 'desc')->paginate(10)
 
-        return view('genres.index', [
+        return view('admin.genres.index', [
             'genres' => $genres,
         ]);
         // return view('genres.index');
@@ -27,7 +33,7 @@ class GenreController extends Controller
      */
     public function create()
     {
-        return view('genres.create');
+        return view('admin.genres.create');
     }
 
     /**
@@ -57,7 +63,7 @@ class GenreController extends Controller
         $genre->save();
 
         return redirect()
-                ->route('genres.index')
+                ->route('admin.genres.index')
                 ->with('status', 'Created a new Genre!');
     }
 
@@ -68,7 +74,7 @@ class GenreController extends Controller
     {
         $genre = Genre::FindOrFail($id);
         
-        return view('genres.show', [
+        return view('admin.genres.show', [
             'genre' => $genre
         ]);
     }
@@ -80,7 +86,7 @@ class GenreController extends Controller
     {
         $genre = Genre::FindOrFail($id);
 
-        return view('genres.edit', [
+        return view('admin.genres.edit', [
             'genre' => $genre
         ]);
     }
@@ -111,7 +117,7 @@ class GenreController extends Controller
         $genre->save();
 
         return redirect()
-                ->route('genres.index')
+                ->route('admin.genres.index')
                 ->with('status', 'Updated Genre!');
 
     }
@@ -124,6 +130,6 @@ class GenreController extends Controller
         $genre = Genre::findOrFail($id);
         $genre->delete();
 
-        return redirect()->route('genres.index')->with('status', 'Genre deleted successfully');
+        return redirect()->route('admin.genres.index')->with('status', 'Genre deleted successfully');
     }
 }

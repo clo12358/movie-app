@@ -2,9 +2,15 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DirectorController;
-use App\Http\Controllers\WriterController;
-use App\Http\Controllers\GenreController;
+// use App\Http\Controllers\DirectorController;
+use App\Http\Controllers\Admin\DirectorController as AdminDirectorController;
+use App\Http\Controllers\User\DirectorController as UserDirectorController;
+// use App\Http\Controllers\WriterController;
+use App\Http\Controllers\Admin\WriterController as AdminWriterController;
+use App\Http\Controllers\User\WriterController as UserWriterController;
+// use App\Http\Controllers\GenreController;
+use App\Http\Controllers\Admin\GenreController as AdminGenreController;
+use App\Http\Controllers\User\GenreController as UserGenreController;
 // use App\Http\Controllers\MovieController;
 use App\Http\Controllers\Admin\MovieController as AdminMovieController;
 use App\Http\Controllers\User\MovieController as UserMovieController;
@@ -43,10 +49,21 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Route::resource('/user/movies', UserMovieController::class)->middleware(['auth'])->names('user.movies')->only(['index', 'show']);
-    Route::resource('/books', UserBookController::class)->middleware(['auth', 'role:user,admin'])->names('user.books')->only(['index', 'show']);
-    // Route::resource('/admin/books', AdminBookController::class)->middleware(['auth'])->names('admin.books');
+    // User/Admin Movies
+    Route::resource('/movies', UserMovieController::class)->middleware(['auth', 'role:user,admin'])->names('user.movies')->only(['index', 'show']);
     Route::resource('/admin/movies', AdminMovieController::class)->middleware(['auth', 'role:admin'])->names('admin.movies');
+
+    // User/Admin Writers
+    Route::resource('/writers', UserWriterController::class)->middleware(['auth', 'role:user,admin'])->names('user.writers')->only(['index', 'show']);
+    Route::resource('/admin/writers', AdminWriterController::class)->middleware(['auth', 'role:admin'])->names('admin.writers');
+
+    // User/Admin Genres
+    Route::resource('/genres', UserGenreController::class)->middleware(['auth', 'role:user,admin'])->names('user.genres')->only(['index', 'show']);
+    Route::resource('/admin/genres', AdminGenreController::class)->middleware(['auth', 'role:admin'])->names('admin.genres');
+
+    // User/Admin Directors
+    Route::resource('/directors', UserDirectorController::class)->middleware(['auth', 'role:user,admin'])->names('user.directors')->only(['index', 'show']);
+    Route::resource('/admin/directors', AdminDirectorController::class)->middleware(['auth', 'role:admin'])->names('admin.directors');
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');

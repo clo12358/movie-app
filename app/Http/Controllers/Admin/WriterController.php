@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use Auth;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Writer;
 
@@ -12,11 +14,15 @@ class WriterController extends Controller
      */
     public function index()
     {
+        if(!Auth::user()->hasRole('admin'))
+        {
+            return to_route('admin.writers.index');
+        }
         $writers = Writer::all();
         //only display 8 at a time
         // orderBy('created_at', 'desc')->paginate(10)
 
-        return view('writers.index', [
+        return view('admin.writers.index', [
             'writers' => $writers,
         ]);
         // return view('writers.index');
@@ -27,7 +33,7 @@ class WriterController extends Controller
      */
     public function create()
     {
-        return view('writers.create');
+        return view('admin.writers.create');
     }
 
     /**
@@ -50,7 +56,7 @@ class WriterController extends Controller
         $writer->save();
 
         return redirect()
-                ->route('writers.index')
+                ->route('admin.writers.index')
                 ->with('status', 'Created a new Writer!');
     }
 
@@ -61,7 +67,7 @@ class WriterController extends Controller
     {
         $writer = Writer::FindOrFail($id);
         
-        return view('writers.show', [
+        return view('admin.writers.show', [
             'writer' => $writer
         ]);
     }
@@ -73,7 +79,7 @@ class WriterController extends Controller
     {
         $writer = Writer::FindOrFail($id);
 
-        return view('writers.edit', [
+        return view('admin.writers.edit', [
             'writer' => $writer
         ]);
     }
@@ -103,7 +109,7 @@ class WriterController extends Controller
         $writer->save();
 
         return redirect()
-                ->route('writers.index')
+                ->route('admin.writers.index')
                 ->with('status', 'Updated Writer!');
 
     }
@@ -116,6 +122,6 @@ class WriterController extends Controller
         $writer = Writer::findOrFail($id);
         $writer->delete();
 
-        return redirect()->route('writers.index')->with('status', 'Writer deleted successfully');
+        return redirect()->route('admin.writers.index')->with('status', 'Writer deleted successfully');
     }
 }
