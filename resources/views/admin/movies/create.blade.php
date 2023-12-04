@@ -12,7 +12,7 @@
 
 <div class="px-10">
     {{-- <form action="{{ route('movies.store') }}" method="POST"> --}}
-    <form action="{{ route('admin.movies.store') }}" method="post">
+    <form enctype="multipart/form-data" action="{{ route('admin.movies.store') }}" method="post">
         @csrf
         <!-- Movie Name -->
         <div>
@@ -143,6 +143,15 @@
             <span class="text-red-400"> {{ $errors->first('release_date') }} </span>
             @endif
         </div>
+
+        {{-- Upload Image --}}
+        <input
+            type="file"
+            name="movie_image"
+            placeholder="Movie image"
+            class="w-full mt-6"
+            field="movie_image"
+            />
 
             <!-- Buttons -->
     <div class="px-4 sm:px-0 flex py-5">

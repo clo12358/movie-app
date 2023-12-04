@@ -71,7 +71,8 @@ class MovieController extends Controller
             'genre_id' => 'required|exists:genres,id',
             'writer_id' => 'required|exists:writers,id',
             'producer' => 'required|string|min:5|max:150',
-            'release_date' => 'required'
+            'release_date' => 'required',
+            'movie_image' => 'file|image'
         ];
         ////////
 
@@ -87,6 +88,12 @@ class MovieController extends Controller
         $movie->writer_id = $request->writer_id;
         $movie->producer = $request->producer;
         $movie->release_date = $request->release_date;
+
+        $movie_image = $request->file('movie_image');
+        $extension = $movie_image->getClientOriginalExtension();
+        $filename = date('Y-m-d-His') . '_' . $request->title . '.' . $extension;
+
+        $movie_image->storeAs('public/images', $filename); // store the image
 
         $movie->save();
 
