@@ -11,26 +11,31 @@
                 </div>
 
                 <!-- Navigation Links -->
+                {{-- Dashboard --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                {{-- Movies --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('admin.movies.index')" :active="request()->routeIs('admin.movies.index')">
                         {{ __('Movies') }}
                     </x-nav-link>
                 </div>
+                {{-- Directors --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('admin.directors.index')" :active="request()->routeIs('admin.directors.index')">
                         {{ __('Directors') }}
                     </x-nav-link>
                 </div>
+                {{-- Writers --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('admin.writers.index')" :active="request()->routeIs('admin.writers.index')">
                         {{ __('Writers') }}
                     </x-nav-link>
                 </div>
+                {{-- Genres --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('admin.genres.index')" :active="request()->routeIs('admin.genres.index')">
                         {{ __('Genres') }}

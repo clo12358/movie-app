@@ -38,6 +38,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Route::resource('/home', HomeController::class)->middleware(['auth', 'role:user,admin'])->names('user.home');
+//     Route::resource('/admin/home', HomeController::class)->middleware(['auth', 'role:admin'])->names('admin.home');
+
+
 Route::middleware('auth')->group(function () {
 
     // Route::resource('directors', DirectorController::class);
