@@ -92,14 +92,24 @@
         <!-- Select Genre -->
         <div>
             <label for="genre_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Genre</label>
-            <select name="genre_id" id="genres" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            {{-- <select name="genre_id" id="genres" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"> --}}
 
-            @forelse($genres as $g)
+            {{-- @forelse($genres as $g)
 
             <option value="{{ $g->id }}">{{ $g->name }}</option>
 
             @empty
             <h4>No Genres found!</h4>
+            @endforelse --}}
+
+            @forelse($genres as $g)
+
+            <input id="{{$g->id}}" type="checkbox" value="{{$g->id}}" name="genres[]">
+            <label for="{{$g->id}}">{{$g->name}}</label>
+
+            @empty
+            <h4>No Genres found!</h4>
+
             @endforelse
                 
             </select>
@@ -148,6 +158,15 @@
             <span class="text-red-400"> {{ $errors->first('release_date') }} </span>
             @endif
         </div>
+
+        {{-- Movie Images --}}
+        <input
+            type="file"
+            name="movie_image"
+            placeholder="Movie image"
+            class="w-full mt-6"
+            field="movie_image"
+            />
 
             <!-- Buttons -->
     <div class="px-4 sm:px-0 flex py-5">

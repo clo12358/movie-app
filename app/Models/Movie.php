@@ -15,10 +15,21 @@ class Movie extends Model
         'rating',
         'run_time',
         'director_id',
-        'genre_id',
         'writer_id',
         'producer',
         'release_date',
         'movie_image'
     ];
+
+    public function genres(){
+        return $this->belongsToMany(Genre::class);
+    }
+
+    public function writer(){
+        return $this->belongsTo(Writer::class);
+    }
+
+    public function director(){
+        return $this->belongsTo(Director::class);
+    }
 }

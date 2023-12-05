@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('run_time');
 
             $table->foreignId('director_id')->constrained();
-            $table->foreignId('genre_id')->constrained();
+            // $table->foreignId('genre_id')->constrained();
             $table->foreignId('writer_id')->constrained();
 
             // $table->foreign('director_id')->references('id')->on('directors');

@@ -15,6 +15,9 @@
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
+                    
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Name
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -53,7 +56,7 @@
         <tbody>
     <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
         <th>
-            <img width="150" src={{ asset("storage/images" . $movies->movie_image) }} />
+            <img width="150px" src="{{ asset("storage/images/" . $movies->movie_image) }}" />
         </th>
         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             {{ $movies->name }}
@@ -77,16 +80,11 @@
                 @endforeach
             </a>
         </td>
-        <td class="px-6 py-4">
-            <a href="{{ route('admin.genres.show', $movies->genre_id) }}">
-                @foreach($genres as $genre)
-                    @if($genre->id == $movies->genre_id)
-                    {{$genre->name}}
-                    @continue
-                @endif
+            <td class="px-6 py-4">
+                @foreach($movies->genres as $g)
+                <a href="{{route('admin.genres.show', $g->id)}}">{{$g->name}}</a>
                 @endforeach
-            </a>
-        </td>
+            </td>
         <td class="px-6 py-4">
             <a href="{{ route('admin.writers.show', $movies->writer_id) }}">
                 @foreach($writers as $writer)

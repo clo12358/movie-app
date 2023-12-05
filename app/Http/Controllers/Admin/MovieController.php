@@ -68,7 +68,7 @@ class MovieController extends Controller
             'rating' => 'required|in:1 star,2 stars,3 stars,4 stars,5 stars',
             'run_time' => 'required|string',
             'director_id' => 'required|exists:directors,id',
-            'genre_id' => 'required|exists:genres,id',
+            'genres' => ['required', 'exists:genres,id'],
             'writer_id' => 'required|exists:writers,id',
             'producer' => 'required|string|min:5|max:150',
             'release_date' => 'required',
@@ -78,24 +78,28 @@ class MovieController extends Controller
 
         $request->validate($rules);
 
+        $movie_image = $request->file('movie_image');
+        $extension = $movie_image->getClientOriginalExtension();
+        $filename = date('y-m-d-His') . '_' .  str_replace(' ', '', $request->title) . '.' . $extension;
+
+        $movie_image->storeAs('public/images', $filename); // store the image
+
+
         $movie = new Movie;
         $movie->name = $request->name;
         $movie->description = $request->description;
         $movie->rating = $request->rating;
         $movie->run_time = $request->run_time;
         $movie->director_id = $request->director_id;
-        $movie->genre_id = $request->genre_id;
+        // $movie->genre_id = $request->genre_id;
         $movie->writer_id = $request->writer_id;
         $movie->producer = $request->producer;
         $movie->release_date = $request->release_date;
-
-        $movie_image = $request->file('movie_image');
-        $extension = $movie_image->getClientOriginalExtension();
-        $filename = date('Y-m-d-His') . '_' . $request->title . '.' . $extension;
-
-        $movie_image->storeAs('public/images', $filename); // store the image
-
+        $movie->movie_image = $filename;
+        
         $movie->save();
+
+        $movie->genres()->attach($request->genres);
 
         return to_route('admin.movies.index')
                 ->with('status', 'Created a new Movie');
@@ -155,7 +159,7 @@ class MovieController extends Controller
             'rating' => 'required|in:1 star,2 stars,3 stars,4 stars,5 stars',
             'run_time' => 'required|string',
             'director_id' => 'required|exists:directors,id',
-            'genre_id' => 'required|exists:genres,id',
+            'genres' => ['required', 'exists:genres,id'],
             'writer_id' => 'required|exists:writers,id',
             'producer' => 'required|string|min:5|max:150',
             'release_date' => 'required'
@@ -174,7 +178,7 @@ class MovieController extends Controller
         $movie->rating = $request->rating;
         $movie->run_time = $request->run_time;
         $movie->director_id = $request->director_id;
-        $movie->genre_id = $request->genre_id;
+        // $movie->genre_id = $request->genre_id;
         $movie->writer_id = $request->writer_id;
         $movie->producer = $request->producer;
         $movie->release_date = $request->release_date;
@@ -195,6 +199,9 @@ class MovieController extends Controller
     public function destroy(string $id)
     {
         $movie = Movie::findOrFail($id);
+
+        $movie->genres()->detach($movie->genres);
+
         $movie->delete();
 
         return redirect()->route('admin.movies.index')->with('status', 'Movie deleted successfully');
