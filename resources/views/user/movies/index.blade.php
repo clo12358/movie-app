@@ -51,7 +51,7 @@
                 </td>
                 <td class="px-6 py-4">
                     @foreach($movie->genres as $g)
-                    <a href="{{route('admin.genres.show', $g->id)}}">{{$g->name}}</a>
+                    <a href="{{route('user.genres.show', $g->id)}}">{{$g->name}}</a>
                     @endforeach
                 </td>
                 <td class="px-6 py-4">

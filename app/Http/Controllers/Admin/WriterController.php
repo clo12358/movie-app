@@ -6,6 +6,7 @@ use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Writer;
+use App\Models\Movie;
 
 class WriterController extends Controller
 {
@@ -66,9 +67,11 @@ class WriterController extends Controller
     public function show(string $id)
     {
         $writer = Writer::FindOrFail($id);
+        $movies = Movie::FindOrFail($id);
         
         return view('admin.writers.show', [
-            'writer' => $writer
+            'writer' => $writer,
+            'movies' =>$movies
         ]);
     }
 

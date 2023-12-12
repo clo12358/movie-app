@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Writer;
+use App\Models\Movie;
 
 class WriterController extends Controller
 {
@@ -23,7 +24,11 @@ class WriterController extends Controller
     public function show(string $id)
     {
         $writer = Writer::findOrFail($id);
+        $movies = Movie::FindOrFail($id);
 
-        return view('user.writers.show')->with('writer', $writer);
+        return view('user.writers.show', [
+            'writer' => $writer,
+            'movies' =>$movies
+        ]);
     }
 }

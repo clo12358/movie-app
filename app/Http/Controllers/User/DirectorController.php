@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Director;
+use App\Models\Movie;
 
 class DirectorController extends Controller
 {
@@ -23,8 +24,12 @@ class DirectorController extends Controller
     public function show(string $id)
     {
         $director = Director::findOrFail($id);
+        $movies = Movie::FindOrFail($id);
 
-        return view('user.directors.show')->with('director', $director);
+        return view('user.directors.show', [
+            'director' => $director,
+            'movies' =>$movies
+        ]);
     }
 
 }

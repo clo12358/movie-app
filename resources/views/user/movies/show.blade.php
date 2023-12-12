@@ -18,7 +18,7 @@
                 </div>
                 <div class="flex -mx-2 mb-4">
                     <div class="md:order-2">
-                        <a href="{{ route('user.movies.index', $movies->id) }}" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+                        <a href="{{ url()->previous() }}" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
                             <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                             Back
                             </span>
@@ -46,7 +46,7 @@
                 <div class="flex mb-4">
                     <div class="mr-4">
                         <span class="font-bold text-gray-700 dark:text-gray-300">Director:</span>
-                        <span class="text-gray-600 dark:text-gray-300"><a href="{{ route('admin.directors.show', $movies->director_id) }}">
+                        <span class="text-gray-600 dark:text-gray-300"><a href="{{ route('user.directors.show', $movies->director_id) }}">
                             @foreach($directors as $director)
                                 @if($director->id == $movies->director_id)
                                 {{$director->first_name}} {{$director->last_name}}
@@ -58,14 +58,14 @@
                     <div>
                         <span class="font-bold text-gray-700 dark:text-gray-300">Genre:</span>
                         <span class="text-gray-600 dark:text-gray-300">@foreach($movies->genres as $g)
-                            <a href="{{route('admin.genres.show', $g->id)}}">{{$g->name}}</a>
+                            <a href="{{route('user.genres.show', $g->id)}}">{{$g->name}}</a>
                             @endforeach</span>
                     </div>
                 </div>
                 <div class="flex mb-4">
                     <div class="mr-4">
                         <span class="font-bold text-gray-700 dark:text-gray-300">Writer:</span>
-                        <span class="text-gray-600 dark:text-gray-300"><a href="{{ route('admin.writers.show', $movies->writer_id) }}">
+                        <span class="text-gray-600 dark:text-gray-300"><a href="{{ route('user.writers.show', $movies->writer_id) }}">
                             @foreach($writers as $writer)
                                 @if($writer->id == $movies->writer_id)
                                 {{$writer->name}}

@@ -20,6 +20,9 @@
                 <th scope="col" class="px-6 py-3">
                     Name
                 </th>
+                <th scope="col" class="px-6 py-3">
+                    Read More
+                </th>
             </tr>
         </thead>
     <tbody>
@@ -28,6 +31,9 @@
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{ $writer->name }}
                 </th>
+                <td class="px-6 py-4">
+                    <a href="{{ route('user.writers.show', $writer->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Read More</a>
+                </td>
             </tr>
         
         @empty

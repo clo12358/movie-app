@@ -12,7 +12,7 @@
                     <div class="relative overflow-x-auto sm:rounded-lg">
                         
                         
-                        <p>You're a user!</p> 
+                        <p>You're an ordinary user!</p> 
                         
                     </div>
                 </div>

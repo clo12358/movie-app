@@ -17,6 +17,9 @@
                 <th scope="col" class="px-6 py-3">
                     Last Name
                 </th>
+                <th scope="col" class="px-6 py-3">
+                    Read More
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +30,9 @@
         </th>
         <td class="px-6 py-4">
             {{ $director->last_name }}
+        </td>
+        <td class="px-6 py-4">
+            <a href="{{ route('user.directors.show', $director->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Read More</a>
         </td>
     </tr>
     @empty

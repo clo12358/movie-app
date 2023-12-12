@@ -6,6 +6,7 @@ use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Director;
+use App\Models\Movie;
 
 class DirectorController extends Controller
 {
@@ -69,9 +70,11 @@ class DirectorController extends Controller
     public function show(string $id)
     {
         $director = Director::FindOrFail($id);
+        $movies = Movie::FindOrFail($id);
         
         return view('admin.directors.show', [
-            'director' => $director
+            'director' => $director,
+            'movies' =>$movies
         ]);
     }
 
