@@ -6,6 +6,7 @@ use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Genre;
+use App\Models\Movie;
 
 class GenreController extends Controller
 {
@@ -73,9 +74,11 @@ class GenreController extends Controller
     public function show(string $id)
     {
         $genre = Genre::FindOrFail($id);
+        $movies = Movie::FindOrFail($id);
         
         return view('admin.genres.show', [
-            'genre' => $genre
+            'genre' => $genre,
+            'movies' =>$movies
         ]);
     }
 

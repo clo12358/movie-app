@@ -1,4 +1,4 @@
-@extends('layouts.Myapp')
+@extends('layouts.admin')
 
 @section('content')
 <div class="bg-white dark:bg-gray-900 w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
@@ -14,6 +14,7 @@
             </a>
         </div>
     </div>
+</div>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

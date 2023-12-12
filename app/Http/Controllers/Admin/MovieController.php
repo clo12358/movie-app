@@ -136,11 +136,14 @@ class MovieController extends Controller
         $genres = Genre::all();
         $writers = Writer::all();
 
+        $selectedGenres = $movie->genres()->pluck('genre_id')->toArray();
+
         return view('admin.movies.edit', [
             'movie' => $movie,
             'directors' => $directors,
             'genres' => $genres,
-            'writers' => $writers
+            'writers' => $writers,
+            'selectedGenres' => $selectedGenres
         ]);
     }
 
@@ -172,7 +175,7 @@ class MovieController extends Controller
 
         $request->validate($rules, $messages);
 
-        $movie = new Movie;
+        $movie = Movie::FindOrFail($id);
         $movie->name = $request->name;
         $movie->description = $request->description;
         $movie->rating = $request->rating;
@@ -183,9 +186,10 @@ class MovieController extends Controller
         $movie->producer = $request->producer;
         $movie->release_date = $request->release_date;
 
-        $movie = Movie::FindOrFail($id);
-        $movie->name = $request->name;
         $movie->save();
+
+        $movie->genres()->sync($request->genres);
+
 
         return redirect()
                 ->route('admin.movies.index')

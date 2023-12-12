@@ -30,6 +30,7 @@ class MovieSeeder extends Seeder
         $movie1->release_date = "2023-01-13";
         $movie1->movie_image = 'dog_gone.png';
         $movie1->save();
+        $movie1->genres()->attach([1, 2]);
 
         $director2 = Director::where('first_name', 'Juame')->first();
         $writer2 = Writer::where('name', 'Anthony Jaswinski')->first();
@@ -45,5 +46,7 @@ class MovieSeeder extends Seeder
         $movie2->release_date = "2016-06-24";
         $movie2->movie_image = 'the_shallows.jpeg';
         $movie2->save();
+        $movie2->genres()->attach([2]);
+
     }
 }

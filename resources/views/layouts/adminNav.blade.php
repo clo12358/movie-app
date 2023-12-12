@@ -19,25 +19,25 @@
                 </div>
                 {{-- Movies --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('user.movies.index')" :active="request()->routeIs('admin.movies.index')">
+                    <x-nav-link :href="route('admin.movies.index')" :active="request()->routeIs('admin.movies.index')">
                         {{ __('Movies') }}
                     </x-nav-link>
                 </div>
                 {{-- Directors --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('user.directors.index')" :active="request()->routeIs('admin.directors.index')">
+                    <x-nav-link :href="route('admin.directors.index')" :active="request()->routeIs('admin.directors.index')">
                         {{ __('Directors') }}
                     </x-nav-link>
                 </div>
                 {{-- Writers --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('user.writers.index')" :active="request()->routeIs('admin.writers.index')">
+                    <x-nav-link :href="route('admin.writers.index')" :active="request()->routeIs('admin.writers.index')">
                         {{ __('Writers') }}
                     </x-nav-link>
                 </div>
                 {{-- Genres --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('user.genres.index')" :active="request()->routeIs('admin.genres.index')">
+                    <x-nav-link :href="route('admin.genres.index')" :active="request()->routeIs('admin.genres.index')">
                         {{ __('Genres') }}
                     </x-nav-link>
                 </div>

@@ -23,7 +23,11 @@ class GenreController extends Controller
     public function show(string $id)
     {
         $genre = Genre::findOrFail($id);
+        $movies = Movie::FindOrFail($id);
 
-        return view('user.genres.show')->with('genre', $genre);
+        return view('user.genres.show', [
+            'genre' => $genre,
+            'movies' =>$movies
+        ]);
     }
 }

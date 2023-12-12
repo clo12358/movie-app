@@ -1,4 +1,4 @@
-@extends('layouts.Myapp')
+@extends('layouts.admin')
 
 <!-- @section('header')
 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -39,7 +39,6 @@
                     {{ $writer->name }}
                 </th>
                 <td class="px-6 py-4">
-                    {{-- <a href="{{ route('writers.show', $writer->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Read More</a> --}}
                     <a href="{{ route('admin.writers.show', $writer->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Read More</a>
                 </td>
             </tr>

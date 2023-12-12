@@ -1,4 +1,4 @@
-@extends('layouts.myApp')
+@extends('layouts.admin')
 
 
 @section('content')
@@ -104,7 +104,7 @@
 
             @forelse($genres as $g)
 
-            <input id="{{$g->id}}" type="checkbox" value="{{$g->id}}" name="genres[]">
+            <input @checked(old('genres') ? in_array($g->id, old('genres')): in_array($g->id, $selectedGenres)) id="{{$g->id}}" type="checkbox" value="{{$g->id}}" name="genres[]">
             <label for="{{$g->id}}">{{$g->name}}</label>
 
             @empty
